@@ -14,18 +14,18 @@ const urlsToCache = [
 
 // Install event: opens the cache and adds the files to it
 self.addEventListener('install', event => {
-  event.waitUntil(
+  /* event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
-  );
+  ); */
 });
 
 // Fetch event: serves assets from cache first, falls back to network
 self.addEventListener('fetch', event => {
-  event.respondWith(
+  /* event.respondWith(
     caches.match(event.request)
       .then(response => {
         // Cache hit - return response
@@ -36,5 +36,5 @@ self.addEventListener('fetch', event => {
         return fetch(event.request);
       }
     )
-  );
+  ); */
 });
