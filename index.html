@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>實用工具網站</title>
 
+    <script>
+        // Redirect to a specific tool page on the PWA's first launch
+        (function() {
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                const redirectUrl = sessionStorage.getItem('pwa_launch_redirect');
+                if (redirectUrl) {
+                    sessionStorage.removeItem('pwa_launch_redirect');
+                    window.location.replace(redirectUrl);
+                }
+            }
+        })();
+    </script>
+
     <!-- PWA & Apple Meta Tags -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0d6efd">
