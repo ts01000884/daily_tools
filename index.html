@@ -6,15 +6,9 @@
     <title>實用工具網站</title>
 
     <script>
-        // Redirect to a specific tool page on the PWA's first launch
+        
         (function() {
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                const redirectUrl = sessionStorage.getItem('pwa_launch_redirect');
-                if (redirectUrl) {
-                    sessionStorage.removeItem('pwa_launch_redirect');
-                    window.location.replace(redirectUrl);
-                }
-            }
+            
         })();
     </script>
 
