@@ -1,0 +1,21 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 960px;
+}
+
+.tool-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid #ddd;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tool-card .card-title {
+    color: #0d6efd;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微波時間換算工具</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container my-5">
+        <header class="text-center mb-5">
+            <h1 class="display-5">微波時間換算機</h1>
+            <p class="lead">輕鬆換算超商與家用微波爐的加熱時間</p>
+        </header>
+
+        <main>
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <form id="conversion-form">
+                        <div class="mb-3">
+                            <label for="store-select" class="form-label fs-5">選擇超商</label>
+                            <select class="form-select" id="store-select" aria-label="選擇超商">
+                                <option data-store="7-eleven" selected>7-ELEVEN</option>
+                                <option data-store="familymart">全家 FamilyMart</option>
+                            </select>
+                        </div>
+
+                        <!-- 7-ELEVEN Presets -->
+                        <div id="seven-eleven-presets" class="mb-3">
+                            <label for="7-eleven-preset-select" class="form-label fs-5">7-ELEVEN 快捷按鈕</label>
+                            <select class="form-select preset-select" id="7-eleven-preset-select">
+                                <option value="1" selected>1號按鈕</option>
+                                <option value="2">2號按鈕</option>
+                                <option value="3">3號按鈕</option>
+                                <option value="4">4號按鈕</option>
+                                <option value="5">5號按鈕</option>
+                                <option value="6">6號按鈕</option>
+                                <option value="7">7號按鈕</option>
+                                <option value="8">8號按鈕</option>
+                                <option value="9">9號按鈕</option>
+                                <option value="0">0號按鈕</option>
+                            </select>
+                        </div>
+
+                        <!-- FamilyMart Presets -->
+                        <div id="familymart-presets" class="mb-3 d-none">
+                            <label for="familymart-preset-select" class="form-label fs-5">全家快捷按鈕</label>
+                            <select class="form-select preset-select" id="familymart-preset-select">
+                                <option value="1" selected>火力1</option>
+                                <option value="2">火力2</option>
+                                <option value="3">火力3</option>
+                                <option value="4">火力4</option>
+                                <option value="5">火力5</option>
+                                <option value="6">火力6</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">計算換算時間</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="results-section" class="mt-5 d-none">
+                <h2 class="text-center mb-4">家用微波爐建議時間</h2>
+                <div class="row text-center">
+                    <!-- Results will be populated by script.js -->
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-header bg-primary-subtle">1000W</div>
+                            <div class="card-body d-flex flex-column justify-content-center">
+                                <h3 id="result-1000" class="card-title">0</h3>
+                                <p class="card-text">秒</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-header bg-success-subtle">800W</div>
+                            <div class="card-body d-flex flex-column justify-content-center">
+                                <h3 id="result-800" class="card-title">0</h3>
+                                <p class="card-text">秒</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-header bg-warning-subtle">700W</div>
+                            <div class="card-body d-flex flex-column justify-content-center">
+                                <h3 id="result-700" class="card-title">0</h3>
+                                <p class="card-text">秒</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-header bg-danger-subtle">600W</div>
+                            <div class="card-body d-flex flex-column justify-content-center">
+                                <h3 id="result-600" class="card-title">0</h3>
+                                <p class="card-text">秒</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info mt-3" role="alert">
+                    <strong>計算公式：</strong> (超商瓦數 × 超商秒數) / 家用瓦數 = 家用秒數
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center mt-5">
+            <a href="../../index.html" class="btn btn-secondary">返回首頁</a>
+        </footer>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
