@@ -1,99 +1,120 @@
 document.addEventListener('DOMContentLoaded', function() {
     // --- DOM Elements ---
-    const conversionForm = document.getElementById('conversion-form');
-    const storeSelect = document.getElementById('store-select');
+    const storeSelector = document.getElementById('store-selector');
     const sevenElevenPresetsDiv = document.getElementById('seven-eleven-presets');
     const familymartPresetsDiv = document.getElementById('familymart-presets');
-    const sevenElevenSelect = document.getElementById('7-eleven-preset-select');
-    const familymartSelect = document.getElementById('familymart-preset-select');
     const resultsSection = document.getElementById('results-section');
+    const floatingResetBtn = document.getElementById('floating-reset-btn');
 
     // --- Data: Total Energy Maps (Watts * Seconds) ---
-    // NOTE: These are placeholder values. Replace with actual measured data.
     const ENERGY_MAPS = {
         '7-eleven': {
-            // Placeholder based on (Original Seconds * 980W)
-            '1': 10 * 980,   // 9800
-            '2': 15 * 980,   // 14700
-            '3': 24 * 980,   // 23520
-            '4': 30 * 980,   // 29400
-            '5': 36 * 980,   // 35280
-            '6': 48 * 980,   // 47040
-            '7': 110 * 980,  // 107800
-            '8': 100 * 980,  // 98000
-            '9': 130 * 980,  // 127400
-            '0': 220 * 980   // 215600
+            '2': 700 * 40, '3': 700 * 52, '4': 700 * 70, '5': 700 * 80,
+            '6': 700 * 120, '8': 700 * 225, '9': 700 * 188, '0': 700 * 283,
+            '8+2': 700 * 265,
+            '1': 10 * 980, // Placeholder
+            '7': 110 * 980, // Placeholder
         },
         'familymart': {
-            // !!! COMPLETELY FICTIONAL PLACEHOLDER VALUES !!!
-            // Assuming 1500W and arbitrary seconds
-            '1': 20 * 1500,  // 30000
-            '2': 30 * 1500,  // 45000
-            '3': 45 * 1500,  // 67500
-            '4': 60 * 1500,  // 90000
-            '5': 90 * 1500,  // 135000
-            '6': 120 * 1500  // 180000
+            '1': 20 * 1500, '2': 30 * 1500, '3': 45 * 1500,
+            '4': 60 * 1500, '5': 90 * 1500, '6': 120 * 1500,
         }
     };
 
-    // --- Functions ---
-    function toggleInputMode() {
-        const selectedOption = storeSelect.options[storeSelect.selectedIndex];
-        const storeType = selectedOption.getAttribute('data-store');
+    let activeStore = '7-eleven'; // Default store
 
-        if (storeType === '7-eleven') {
+    // --- Functions ---
+
+    // Resets preset selection and results
+    function resetSelection() {
+        document.querySelectorAll('.preset-btn.active').forEach(btn => {
+            btn.classList.remove('active');
+            btn.classList.replace('btn-primary', 'btn-outline-secondary');
+        });
+        resultsSection.classList.add('d-none');
+        floatingResetBtn.classList.add('d-none');
+    }
+
+    // Handles store selection
+    function handleStoreSelection(event) {
+        const clickedBtn = event.target.closest('button');
+        if (!clickedBtn || clickedBtn.classList.contains('active')) return;
+
+        activeStore = clickedBtn.dataset.store;
+
+        // Update button styles
+        storeSelector.querySelectorAll('button').forEach(btn => {
+            btn.classList.remove('active', 'btn-primary');
+            btn.classList.add('btn-outline-primary');
+        });
+        clickedBtn.classList.add('active', 'btn-primary');
+        clickedBtn.classList.remove('btn-outline-primary');
+
+        // Toggle preset divs
+        if (activeStore === '7-eleven') {
             sevenElevenPresetsDiv.classList.remove('d-none');
             familymartPresetsDiv.classList.add('d-none');
-        } else if (storeType === 'familymart') {
+        } else {
             sevenElevenPresetsDiv.classList.add('d-none');
             familymartPresetsDiv.classList.remove('d-none');
         }
+        resetSelection();
     }
 
-    function calculateAndDisplay() {
-        const selectedStoreOption = storeSelect.options[storeSelect.selectedIndex];
-        const storeType = selectedStoreOption.getAttribute('data-store');
-        
-        let selectedPresetValue;
-        if (storeType === '7-eleven') {
-            selectedPresetValue = sevenElevenSelect.value;
-        } else if (storeType === 'familymart') {
-            selectedPresetValue = familymartSelect.value;
+    // Handles preset button selection
+    function handlePresetSelection(event) {
+        const clickedBtn = event.target.closest('.preset-btn');
+        if (!clickedBtn) return;
+
+        // Clear previous active preset
+        const currentActive = clickedBtn.parentElement.querySelector('.preset-btn.active');
+        if (currentActive) {
+            currentActive.classList.remove('active');
+            currentActive.classList.replace('btn-primary', 'btn-outline-secondary');
         }
 
-        // 1. Get total energy from the map
-        const totalEnergy = ENERGY_MAPS[storeType][selectedPresetValue];
+        // Set new active preset
+        clickedBtn.classList.add('active');
+        clickedBtn.classList.replace('btn-outline-secondary', 'btn-primary');
+        
+        calculateAndDisplay(clickedBtn.dataset.value);
+    }
 
+    // Calculates and displays the results
+    function calculateAndDisplay(selectedValue) {
+        const totalEnergy = ENERGY_MAPS[activeStore][selectedValue];
         if (!totalEnergy) {
             alert('找不到對應的能量數據！');
             return;
         }
 
-        // 2. Define home wattages
         const homeWattages = [1000, 800, 700, 600];
-
-        // 3. Loop, calculate, and update results
         homeWattages.forEach(wattage => {
             const homeSeconds = totalEnergy / wattage;
-            const resultElement = document.getElementById(`result-${wattage}`);
-            if (resultElement) {
-                resultElement.textContent = homeSeconds.toFixed(1);
-            }
+            document.getElementById(`result-${wattage}`).textContent = homeSeconds.toFixed(1);
         });
 
-        // 4. Show results
         resultsSection.classList.remove('d-none');
+        floatingResetBtn.classList.remove('d-none');
+
+        // Scroll to results
+        setTimeout(() => {
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100); // A small delay can help ensure the section is rendered
+    }
+
+    // Handles floating reset button click
+    function handleResetAndScrollTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        resetSelection();
     }
 
     // --- Event Listeners ---
-    storeSelect.addEventListener('change', toggleInputMode);
-    conversionForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        calculateAndDisplay();
-    });
-
-    // --- Initial State ---
-    toggleInputMode();
+    storeSelector.addEventListener('click', handleStoreSelection);
+    sevenElevenPresetsDiv.addEventListener('click', handlePresetSelection);
+    familymartPresetsDiv.addEventListener('click', handlePresetSelection);
+    floatingResetBtn.addEventListener('click', handleResetAndScrollTop);
 });
+
 
 

@@ -11,64 +11,63 @@
 </head>
 <body>
     <div class="container my-5">
-        <header class="text-center mb-5">
+        <header class="text-center mb-4">
             <h1 class="display-5">微波時間換算機</h1>
             <p class="lead">輕鬆換算超商與家用微波爐的加熱時間</p>
         </header>
 
         <main>
-            <div class="card shadow-sm">
-                <div class="card-body p-4">
-                    <form id="conversion-form">
-                        <div class="mb-3">
-                            <label for="store-select" class="form-label fs-5">選擇超商</label>
-                            <select class="form-select" id="store-select" aria-label="選擇超商">
-                                <option data-store="7-eleven" selected>7-ELEVEN</option>
-                                <option data-store="familymart">全家 FamilyMart</option>
-                            </select>
-                        </div>
-
-                        <!-- 7-ELEVEN Presets -->
-                        <div id="seven-eleven-presets" class="mb-3">
-                            <label for="7-eleven-preset-select" class="form-label fs-5">7-ELEVEN 快捷按鈕</label>
-                            <select class="form-select preset-select" id="7-eleven-preset-select">
-                                <option value="1" selected>1號按鈕</option>
-                                <option value="2">2號按鈕</option>
-                                <option value="3">3號按鈕</option>
-                                <option value="4">4號按鈕</option>
-                                <option value="5">5號按鈕</option>
-                                <option value="6">6號按鈕</option>
-                                <option value="7">7號按鈕</option>
-                                <option value="8">8號按鈕</option>
-                                <option value="9">9號按鈕</option>
-                                <option value="0">0號按鈕</option>
-                            </select>
-                        </div>
-
-                        <!-- FamilyMart Presets -->
-                        <div id="familymart-presets" class="mb-3 d-none">
-                            <label for="familymart-preset-select" class="form-label fs-5">全家快捷按鈕</label>
-                            <select class="form-select preset-select" id="familymart-preset-select">
-                                <option value="1" selected>火力1</option>
-                                <option value="2">火力2</option>
-                                <option value="3">火力3</option>
-                                <option value="4">火力4</option>
-                                <option value="5">火力5</option>
-                                <option value="6">火力6</option>
-                            </select>
-                        </div>
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">計算換算時間</button>
-                        </div>
-                    </form>
+            <!-- Store Selection -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">1. 選擇超商</h5>
+                    <div id="store-selector" class="d-grid gap-2 d-sm-flex">
+                        <button type="button" class="btn btn-primary active" data-store="7-eleven">7-ELEVEN</button>
+                        <button type="button" class="btn btn-outline-primary" data-store="familymart">全家 FamilyMart</button>
+                    </div>
                 </div>
             </div>
 
+            <!-- Preset Selection -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">2. 選擇快捷按鈕</h5>
+                    <!-- 7-ELEVEN Presets -->
+                    <div id="seven-eleven-presets">
+                        <div class="preset-grid">
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="1">1</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="2">2</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="3">3</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="4">4</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="5">5</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="6">6</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="7">7</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="8">8</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="9">9</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="0">0</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn grid-span-2" data-value="8+2">8+2</button>
+                        </div>
+                    </div>
+
+                    <!-- FamilyMart Presets -->
+                    <div id="familymart-presets" class="d-none">
+                        <div class="preset-grid">
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="1">火力1</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="2">火力2</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="3">火力3</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="4">火力4</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="5">火力5</button>
+                            <button type="button" class="btn btn-outline-secondary preset-btn" data-value="6">火力6</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
             <div id="results-section" class="mt-5 d-none">
                 <h2 class="text-center mb-4">家用微波爐建議時間</h2>
                 <div class="row text-center">
-                    <!-- Results will be populated by script.js -->
+                    <!-- 1000W -->
                     <div class="col-md-6 col-lg-3 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-header bg-primary-subtle">1000W</div>
@@ -78,6 +77,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 800W -->
                     <div class="col-md-6 col-lg-3 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-header bg-success-subtle">800W</div>
@@ -87,6 +87,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 700W -->
                     <div class="col-md-6 col-lg-3 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-header bg-warning-subtle">700W</div>
@@ -96,6 +97,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 600W -->
                     <div class="col-md-6 col-lg-3 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-header bg-danger-subtle">600W</div>
@@ -107,7 +109,7 @@
                     </div>
                 </div>
                 <div class="alert alert-info mt-3" role="alert">
-                    <strong>計算公式：</strong> (超商瓦數 × 超商秒數) / 家用瓦數 = 家用秒數
+                    <strong>計算公式：</strong> (總熱量) / 家用瓦數 = 家用秒數
                 </div>
             </div>
         </main>
@@ -115,6 +117,14 @@
         <footer class="text-center mt-5">
             <a href="../../index.html" class="btn btn-secondary">返回首頁</a>
         </footer>
+
+        <!-- Floating Reset Button -->
+        <button id="floating-reset-btn" class="btn btn-primary shadow-lg d-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up me-2" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+            </svg>
+            重選
+        </button>
     </div>
 
     <!-- Custom JavaScript -->
