@@ -1,5 +1,5 @@
 // Define a cache name
-const CACHE_NAME = 'daily-tools-cache-202601211348';
+const CACHE_NAME = 'daily-tools-cache-202601211411';
 
 // List of files to cache
 const urlsToCache = [
