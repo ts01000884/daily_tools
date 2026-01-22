@@ -25,6 +25,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Functions ---
 
+    // Helper function to format total seconds into "X 分 Y 秒"
+    function formatTime(totalSeconds) {
+        if (isNaN(totalSeconds) || totalSeconds < 0) {
+            return '無效時間';
+        }
+        const roundedSeconds = Math.round(totalSeconds);
+        const minutes = Math.floor(roundedSeconds / 60);
+        const seconds = roundedSeconds % 60;
+
+        let result = '';
+        if (minutes > 0) {
+            result += `${minutes} <small>分</small> `;
+        }
+        if (seconds > 0 || minutes === 0) {
+            result += `${seconds} <small>秒</small>`;
+        }
+        return result.trim();
+    }
+
     // Resets preset selection and results
     function resetSelection() {
         document.querySelectorAll('.preset-btn.active').forEach(btn => {
@@ -91,7 +110,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const homeWattages = [1000, 800, 700, 600];
         homeWattages.forEach(wattage => {
             const homeSeconds = totalEnergy / wattage;
-            document.getElementById(`result-${wattage}`).textContent = homeSeconds.toFixed(1);
+            const resultElement = document.getElementById(`result-${wattage}`);
+            if (resultElement) {
+                resultElement.innerHTML = formatTime(homeSeconds);
+            }
         });
 
         resultsSection.classList.remove('d-none');
