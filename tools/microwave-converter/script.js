@@ -16,8 +16,17 @@ document.addEventListener('DOMContentLoaded', function() {
             '7': 110 * 980, // Placeholder
         },
         'familymart': {
-            '1': 20 * 1500, '2': 30 * 1500, '3': 45 * 1500,
-            '4': 60 * 1500, '5': 90 * 1500, '6': 120 * 1500,
+            '1': 700 * 12,
+            '2': 700 * 36,
+            '3': 700 * 46,
+            '4': 700 * 62,
+            '5': 700 * 71,
+            '6': 700 * 107,
+            '7': 700 * 137,
+            '8': 700 * 200,
+            '9': 700 * 167,
+            '0': 700 * 252,
+            '8+2': 700 * 236,
         }
     };
 
@@ -137,6 +146,5 @@ document.addEventListener('DOMContentLoaded', function() {
     familymartPresetsDiv.addEventListener('click', handlePresetSelection);
     floatingResetBtn.addEventListener('click', handleResetAndScrollTop);
 });
-
 
 
