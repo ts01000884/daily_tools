@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             '3': 700 * 46,
             '4': 700 * 62,
             '5': 700 * 71,
-            '6': 700 * 107,
+            '6': 700 * 120,
             '7': 700 * 137,
             '8': 700 * 200,
             '9': 700 * 167,
@@ -146,5 +146,4 @@ document.addEventListener('DOMContentLoaded', function() {
     familymartPresetsDiv.addEventListener('click', handlePresetSelection);
     floatingResetBtn.addEventListener('click', handleResetAndScrollTop);
 });
-
 
