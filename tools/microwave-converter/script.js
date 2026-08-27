@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         '7-eleven': {
             '2': 700 * 40, '3': 700 * 52, '4': 700 * 70, '5': 700 * 80,
             '6': 700 * 120, '8': 700 * 225, '9': 700 * 188, '0': 700 * 283,
+            '5+1': 700 * 117,
             '8+2': 700 * 265,
             '1': 10 * 980, // Placeholder
             '7': 110 * 980, // Placeholder
