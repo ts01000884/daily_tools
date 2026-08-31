@@ -19,6 +19,110 @@ body {
     padding: 0.75rem 0.5rem;
 }
 
+/* --- Manual Input --- */
+/* (history: old <input> fields; replaced by the scroller picker below) */
+
+/* --- Manual Scroller Picker --- */
+.manual-picker-group {
+    /* reserve height so layout doesn't jump when results appear below */
+    min-height: 88px;
+}
+
+.manual-picker-label {
+    font-weight: 500;
+}
+
+.manual-picker-row {
+    display: flex;
+    align-items: stretch;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.manual-picker {
+    position: relative;
+    width: 120px;
+    height: 144px; /* 3 rows (48px each) — middle row is the selection */
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+}
+
+/* Centered highlight / selection window (middle row, top = 48px) */
+.manual-picker-marker {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    top: 48px;
+    bottom: 48px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    background: rgba(13, 110, 253, 0.10);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.manual-picker-list {
+    overflow-y: auto;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    scrollbar-width: none;
+}
+.manual-picker-list::-webkit-scrollbar {
+    display: none;
+}
+
+.manual-picker-item {
+    box-sizing: border-box;
+    height: 48px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+    border: 0;
+    background: transparent;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #212529;
+    cursor: pointer;
+}
+.manual-picker-item:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+.manual-picker-item.active {
+    color: #0d6efd;
+    font-weight: 700;
+}
+.manual-picker-item:focus {
+    outline: 2px solid #0d6efd;
+    outline-offset: -4px;
+}
+
+.manual-picker-unit {
+    font-weight: 500;
+}
+
+.manual-picker-actions {
+    width: 100%;
+    margin-top: 0.75rem;
+}
+
+/* Hide but keep accessible (used by the calculation logic) */
+.manual-hidden {
+    position: absolute!important;
+    width: 1px!important;
+    height: 1px!important;
+    clip: rect(0 0 0 0)!important;
+    clip-path: inset(50%)!important;
+    white-space: nowrap!important;
+    overflow: hidden!important;
+}
+
 /* Style for active preset button */
 .preset-btn.active {
     background-color: #0d6efd;

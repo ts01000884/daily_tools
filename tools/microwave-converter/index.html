@@ -84,9 +84,36 @@
                 </div>
             </div>
 
+            <!-- Manual Input Section (phone-first scroller picker) -->
+            <div class="manual-picker-group mt-3">
+                <span class="manual-picker-label">超商 700W：</span>
+                <div class="manual-picker-row">
+                    <div class="manual-picker" id="picker-min" data-field="min" role="group" aria-label="分鐘選擇">
+                        <div class="manual-picker-marker" aria-hidden="true"></div>
+                        <div class="manual-picker-list"></div>
+                    </div>
+                    <span class="manual-picker-unit">分</span>
+                    <div class="manual-picker" id="picker-sec" data-field="sec" role="group" aria-label="秒選擇">
+                        <div class="manual-picker-marker" aria-hidden="true"></div>
+                        <div class="manual-picker-list"></div>
+                    </div>
+                    <span class="manual-picker-unit">秒</span>
+                </div>
+                <div class="manual-picker-actions">
+                    <button type="button" id="manual-calculate-btn" class="btn btn-sm btn-success">換算</button>
+                </div>
+                <!-- Hidden form parity inputs: kept for assistive tech / calculation -->
+                <span class="manual-hidden">
+                    <label id="lbl-min">分鐘</label>
+                    <input type="number" id="manual-min" value="0" min="0" max="10">
+                    <label id="lbl-sec">秒</label>
+                    <input type="number" id="manual-sec" value="0" min="0" max="60">
+                </span>
+            </div>
+
             <!-- Results Section -->
-            <div id="results-section" class="mt-5 d-none">
-                <h2 class="text-center mb-4">家用微波爐建議時間</h2>
+            <div id="results-section" class="mt-4 d-none">
+                <h3 class="text-center mb-3">家用微波爐建議時間</h3>
                 <div class="row text-center">
                     <!-- 1000W -->
                     <div class="col-md-6 col-lg-3 mb-4">
@@ -124,9 +151,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="alert alert-info mt-3" role="alert">
-                    <strong>計算公式：</strong> (總熱量) / 家用瓦數 = 家用秒數
                 </div>
             </div>
         </main>
